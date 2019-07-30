@@ -72,6 +72,9 @@ RUN mkdir -p $HOME/.vim && cd $HOME/.vim \
     && git clone https://github.com/SenZhangAI/vim.git \
     && cd vim && sh install.sh
 
+## install common tools
+RUN yum install -y wget tree
+
 WORKDIR /root
 
 ENTRYPOINT ["/bin/zsh"]
