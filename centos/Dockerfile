@@ -73,7 +73,7 @@ RUN mkdir -p $HOME/.vim && cd $HOME/.vim \
     && cd vim && sh install.sh
 
 ## install common tools
-RUN yum install -y wget tree
+RUN yum install -y wget tree sudo
 
 WORKDIR /root
 
