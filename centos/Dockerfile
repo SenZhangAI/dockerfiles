@@ -3,11 +3,10 @@ FROM centos:${VERSION}
 
 LABEL maintainer="Sen Zhang <szhang.hust@gmail.com>"
 
-RUN yum -y update
-# epel-release for luajit
-RUN yum install -y epel-release curl gcc gcc-c++ make git
-
-RUN yum install -y zsh
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 && \
+    yum -y updateinfo && \
+    yum install -y epel-release && \
+    yum install -y curl gcc gcc-c++ make git zsh
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
