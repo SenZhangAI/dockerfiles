@@ -11,58 +11,8 @@ RUN yum install -y zsh
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-ARG VIM_VERSION=master
-ARG VIM_ENABLE_GUI=""
-ARG VIM_ENABLE_PERL="yes"
-ARG VIM_ENABLE_PYTHON=""
-ARG VIM_ENABLE_PYTHON3="yes"
-ARG VIM_ENABLE_RUBY="yes"
-ARG VIM_ENABLE_LUA="yes"
-ARG VIM_ENABLE_TCL=""
-
-RUN yum install -y ctags \
-        glibc-devel \
-        gettext \
-        ncurses \
-        ncurses-devel \
-        libacl-devel \
-    && yum install -y \
-        diffutils \
-        ${VIM_ENABLE_GUI:+gtk3-devel libXmu-devel} \
-        ${VIM_ENABLE_PERL:+perl perl-devel perl-ExtUtils-ParseXS perl-ExtUtils-CBuilder perl-ExtUtils-Embed} \
-        ${VIM_ENABLE_PYTHON:+python-devel} \
-        ${VIM_ENABLE_PYTHON3:+python36 python36-devel} \
-        ${VIM_ENABLE_RUBY:+ruby ruby-devel} \
-        ${VIM_ENABLE_LUA:+lua lua-devel luajit-devel} \
-        ${VIM_ENABLE_TCL:+tcl-devel} \
-    && git -c http.postBuffer=1048576000 -c advice.detachedHead=false \
-        clone --depth 1 --branch "${VIM_VERSION}" \
-        https://github.com/vim/vim.git /usr/src/vim \
-    && cd /usr/src/vim \
-    && ./configure \
-        --with-features=huge \
-        --enable-multibyte \
-        --enable-cscope \
-        ${VIM_ENABLE_GUI:+--enable-gui=gtk3} \
-        ${VIM_ENABLE_PERL:+--enable-perlinterp} \
-        ${VIM_ENABLE_PYTHON:+--enable-pythoninterp} \
-        ${VIM_ENABLE_PYTHON3:+--enable-python3interp} \
-        ${VIM_ENABLE_RUBY:+--enable-rubyinterp} \
-        ${VIM_ENABLE_LUA:+--enable-luainterp --with-luajit} \
-        ${VIM_ENABLE_TCL:+--enable-tclinterp} \
-        --enable-fail-if-missing \
-    && make \
-    && make install \
-    && rm -rf /usr/src/vim \
-#test
-    && vim -es \
-        ${VIM_ENABLE_PERL:+-c 'verbose perl print("Perl $^V")'} \
-        ${VIM_ENABLE_PYTHON:+-c 'verbose python import platform;print("Python v" + platform.python_version())'} \
-#${VIM_ENABLE_PYTHON3:+-c 'verbose python3 import platform;print("Python3 v" + platform.python_version())'} \
-        ${VIM_ENABLE_RUBY:+-c 'verbose ruby puts "Ruby v#{RUBY_VERSION}"'} \
-        ${VIM_ENABLE_LUA:+-c 'verbose lua print(_VERSION)'} \
-        ${VIM_ENABLE_TCL:+-c 'verbose tcl puts "Tcl v[info patchlevel]"'} \
-        -c q
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm || echo "ok" \
+    && yum install -y neovim python3-neovim
 
 RUN git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && cd oh-my-zsh-sen && sh install.sh
 
