@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build --build-arg "VIM_ENABLE_ALL=yes" -t "sen/centos:latest" .
+docker build -t "sen/centos:latest" .

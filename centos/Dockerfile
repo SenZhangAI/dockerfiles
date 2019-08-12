@@ -12,15 +12,13 @@ RUN yum install -y zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 ARG VIM_VERSION=master
-ARG VIM_ENABLE_ALL=""
-ARG VIM_ENABLE_GUI="${VIM_ENABLE_ALL}"
-ARG VIM_ENABLE_PERL="${VIM_ENABLE_ALL}"
-#ARG VIM_ENABLE_PYTHON="${VIM_ENABLE_ALL}"
-ARG VIM_ENABLE_PYTHON3="${VIM_ENABLE_ALL}"
-ARG VIM_ENABLE_RUBY="${VIM_ENABLE_ALL}"
-ARG VIM_ENABLE_LUA="${VIM_ENABLE_ALL}"
-ARG VIM_ENABLE_TCL="${VIM_ENABLE_ALL}"
-ARG LUA_VERSION="5.3"
+ARG VIM_ENABLE_GUI=""
+ARG VIM_ENABLE_PERL="yes"
+ARG VIM_ENABLE_PYTHON=""
+ARG VIM_ENABLE_PYTHON3="yes"
+ARG VIM_ENABLE_RUBY="yes"
+ARG VIM_ENABLE_LUA="yes"
+ARG VIM_ENABLE_TCL=""
 
 RUN yum install -y ctags \
         glibc-devel \
