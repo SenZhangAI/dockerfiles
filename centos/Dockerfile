@@ -16,12 +16,18 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
 
 RUN git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && cd oh-my-zsh-sen && sh install.sh
 
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - \
+    && yum install -y sudo gcc-c++ make nodejs \
+    && curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo \
+    && yum install -y yarn
+
 RUN mkdir -p $HOME/.vim && cd $HOME/.vim \
     && git clone https://github.com/SenZhangAI/vim.git \
-    && cd vim && sh install.sh
+    && cd vim
 
 ## install common tools
-RUN yum install -y wget tree sudo
+# net-tools for netstat
+RUN yum install -y wget tree net-tools
 
 WORKDIR /root
 
