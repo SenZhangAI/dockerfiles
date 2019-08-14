@@ -20,6 +20,11 @@ RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - \
     && curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo \
     && yum install -y yarn
 
+RUN npm install -g neovim \
+    && yum install -y python36-setuptools \
+    && easy_install-3.6 pip \
+    && pip3 install neovim
+
 RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim \
     && git clone https://github.com/SenZhangAI/vim.git \
     && cd vim && ./install.sh
