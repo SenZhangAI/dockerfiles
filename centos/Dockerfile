@@ -11,7 +11,7 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 && \
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm || echo "ok" \
-    && yum install -y neovim python3-neovim
+    && yum install -y python-devel python36 python36-devel neovim python3-neovim
 
 RUN git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && cd oh-my-zsh-sen && sh install.sh
 
@@ -20,9 +20,9 @@ RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - \
     && curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo \
     && yum install -y yarn
 
-RUN mkdir -p $HOME/.vim && cd $HOME/.vim \
+RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim \
     && git clone https://github.com/SenZhangAI/vim.git \
-    && cd vim
+    && cd vim && ./install.sh
 
 ## install common tools
 # net-tools for netstat
