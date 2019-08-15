@@ -33,6 +33,8 @@ RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim \
 # net-tools for netstat
 RUN yum install -y wget tree net-tools
 
+RUN sudo yum install -y clang
+
 WORKDIR /root
 
 ENTRYPOINT ["/bin/zsh"]
