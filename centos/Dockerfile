@@ -31,7 +31,7 @@ RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim &&\
 
 ## install common tools
 # net-tools for netstat
-RUN yum install -y wget tree net-tools
+RUN yum install -y wget tree net-tools gdb
 
 RUN sudo yum install -y clang
 
