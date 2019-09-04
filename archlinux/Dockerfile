@@ -41,7 +41,7 @@ RUN pacman -S --noconfirm which && mkdir -p $HOME/.vim && cd $HOME/.vim &&\
 
 ### install common tools
 ## net-tools for netstat
-RUN pacman -S --noconfirm wget tree net-tools clang gdb
+RUN pacman -S --noconfirm wget tree net-tools clang gdb tmux
 
 WORKDIR /root
 

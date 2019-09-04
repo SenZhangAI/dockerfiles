@@ -29,6 +29,14 @@ RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim &&\
     git clone https://github.com/SenZhangAI/vim.git &&\
     cd vim && ./install.sh
 
+RUN yum install -y ncurses ncurses-devel libevent libevent-devel automake byacc &&\
+    mkdir -p $HOME/tmp &&\
+    git clone --depth=1 https://github.com/tmux/tmux.git $HOME/tmp/tmux && cd $HOME/tmp/tmux &&\
+    sh autogen.sh &&\
+    ./configure && make &&\
+    cp $HOME/tmp/tmux/tmux /usr/local/bin &&\
+    rm -rf $HOME/tmp
+
 ## install common tools
 # net-tools for netstat
 RUN yum install -y wget tree net-tools gdb
