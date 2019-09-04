@@ -29,6 +29,8 @@ RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim &&\
     git clone https://github.com/SenZhangAI/vim.git &&\
     cd vim && ./install.sh
 
+RUN cd $HOME && git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && cd oh-my-zsh-sen && sh install.sh
+
 RUN yum install -y ncurses ncurses-devel libevent libevent-devel automake byacc &&\
     mkdir -p $HOME/tmp &&\
     git clone --depth=1 https://github.com/tmux/tmux.git $HOME/tmp/tmux && cd $HOME/tmp/tmux &&\
