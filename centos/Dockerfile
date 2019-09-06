@@ -6,14 +6,13 @@ LABEL maintainer="Sen Zhang <szhang.hust@gmail.com>"
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 &&\
     yum -y updateinfo &&\
     yum install -y epel-release &&\
-    yum install -y curl gcc gcc-c++ make git zsh sudo
+    yum install -y curl gcc gcc-c++ make git zsh sudo which
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && sh ./oh-my-zsh-sen/install.sh && rm -rf ./oh-my-zsh-sen
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm || echo "ok" &&\
     yum install -y python-devel python36 python36-devel neovim python3-neovim
-
-RUN git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && cd oh-my-zsh-sen && sh install.sh
 
 RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - &&\
     yum install -y nodejs &&\
@@ -25,11 +24,9 @@ RUN npm install -g neovim &&\
     easy_install-3.6 pip &&\
     pip3 install neovim
 
-RUN yum install -y which && mkdir -p $HOME/.vim && cd $HOME/.vim &&\
-    git clone https://github.com/SenZhangAI/vim.git &&\
-    cd vim && ./install.sh
-
-RUN cd $HOME && git clone https://github.com/SenZhangAI/oh-my-zsh-sen.git && cd oh-my-zsh-sen && sh install.sh
+RUN mkdir -p $HOME/.vim &&\
+    git clone https://github.com/SenZhangAI/vim.git $HOME/.vim/vim &&\
+    sh $HOME/.vim/vim/install.sh
 
 RUN yum install -y ncurses ncurses-devel libevent libevent-devel automake byacc &&\
     mkdir -p $HOME/tmp &&\
@@ -37,13 +34,18 @@ RUN yum install -y ncurses ncurses-devel libevent libevent-devel automake byacc 
     sh autogen.sh &&\
     ./configure && make &&\
     cp $HOME/tmp/tmux/tmux /usr/local/bin &&\
+    cd $HOME &&\
     rm -rf $HOME/tmp
+
+RUN curl https://raw.githubusercontent.com/SenZhangAI/dotfiles/master/bootstrap.sh | bash
 
 ## install common tools
 # net-tools for netstat
 RUN yum install -y wget tree net-tools gdb
 
 RUN sudo yum install -y clang
+
+RUN yum clean all -y
 
 WORKDIR /root
 
