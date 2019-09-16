@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t "sen/archlinux:latest" .
+docker build -t "sen/arch:latest" .
