@@ -43,7 +43,7 @@ RUN curl https://raw.githubusercontent.com/SenZhangAI/dotfiles/master/bootstrap.
 
 ### install common tools
 ## net-tools for netstat
-RUN pacman -S --noconfirm wget tree net-tools clang gdb tmux
+RUN pacman -S --noconfirm wget tree net-tools clang gdb tmux netcat
 
 RUN pacman -Scc --noconfirm
 

@@ -41,7 +41,7 @@ RUN curl https://raw.githubusercontent.com/SenZhangAI/dotfiles/master/bootstrap.
 
 ## install common tools
 # net-tools for netstat
-RUN yum install -y wget tree net-tools gdb
+RUN yum install -y wget tree net-tools gdb nc
 
 RUN sudo yum install -y clang
 
