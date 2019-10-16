@@ -45,6 +45,14 @@ RUN yum install -y wget tree net-tools gdb nc
 
 RUN sudo yum install -y clang
 
+## install clangd
+RUN sudo yum install -y epel-release &&\
+    sudo yum install -y snapd
+    sudo systemctl enable --now snapd.socket &&\
+    sudo ln -s /var/lib/snapd/snap /snap
+## Need reboot here when using real machine
+RUN sudo snap install clangd --classic
+
 RUN yum clean all -y
 
 WORKDIR /root
