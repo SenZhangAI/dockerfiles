@@ -3,3 +3,4 @@
 *.frm
 *.ibd
 app/mango/data
+data/

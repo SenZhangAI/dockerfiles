@@ -47,7 +47,7 @@ RUN sudo yum install -y clang
 
 ## install clangd
 RUN sudo yum install -y epel-release &&\
-    sudo yum install -y snapd
+    sudo yum install -y snapd &&\
     sudo systemctl enable --now snapd.socket &&\
     sudo ln -s /var/lib/snapd/snap /snap
 ## Need reboot here when using real machine
