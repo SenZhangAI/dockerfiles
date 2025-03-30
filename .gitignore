@@ -4,3 +4,4 @@
 *.ibd
 app/mango/data
 data/
+.DS_Store
